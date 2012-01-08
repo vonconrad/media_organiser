@@ -37,8 +37,16 @@ module MediaOrganiser
       write_meta_data unless dry_run? || CLI.options.skip_metadata?
     end
 
+    def title
+      Data.get_title(name)
+    end
+
+    def year
+      Data.get_year(name)
+    end
+
     def new_name
-      [Data.get_title(name), Data.get_year(name).wrap('()')].join(' ')
+      [title, (year ? year.wrap('()') : nil)].compact.join(' ')
     end
 
     def write_meta_data
