@@ -54,7 +54,7 @@ module MediaOrganiser
     end
 
     def year
-      Data.get_year(name, true) || Data.get_year(pdir)
+      Data.get_year(name, true) || Data.get_year(pdir) || 'UNKNOWN_YEAR'
     end
 
     def season
