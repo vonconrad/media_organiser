@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+Signal.trap("INT") { exit }
+
+$:.push File.expand_path("../../lib", __FILE__)
+
+require 'media_organiser'
+
+directory = ARGV.shift
+
+options = Slop.parse do
+  on :a,  :anime,         optional: true
+  on :d,  :dry,           optional: true
+  on :f,  :force,         optional: true
+  on :m,  :movie,         optional: true
+  on :s,  :skip_metadata, optional: true
+  on :t,  :tv,            optional: true
+end
+
+MediaOrganiser::CLI.new(directory, options).run
